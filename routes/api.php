@@ -27,7 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 | /api/companies
 |
 */
-Route::apiResource('companies', CompanyController::class);
+Route::apiResource('/companies', CompanyController::class);
+
 Route::view('/{any}', 'dashboard')
     ->middleware(['auth'])
     ->where('any', '.*');
