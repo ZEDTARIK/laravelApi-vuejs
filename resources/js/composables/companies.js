@@ -47,6 +47,10 @@ export default function useCompanies() {
 
     }
 
+    const deleteCompany = async (id) => {
+        await axios.delete(`/api/companies/${id}`);
+    }
+
 
     return {
         companies,
@@ -55,6 +59,7 @@ export default function useCompanies() {
         getCompanies,
         storeCompany,
         updateCompany,
+        deleteCompany,
         errors,
     }
 
