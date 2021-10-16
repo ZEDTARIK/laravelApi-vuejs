@@ -14,6 +14,11 @@ export default function useCompanies() {
         companies.value = response.data.data
     }
 
+    const getCompany = async (id) => {
+        let response = await axios('/api/companies/' + id )
+        company.value = response.data.data
+    }
+
     const storeCompany = async (data) => {
         try {
             await axios.post('/api/companies/', data)
@@ -28,11 +33,28 @@ export default function useCompanies() {
 
     }
 
+    const updateCompany = async (id) => {
+        try {
+            await axios.put('/api/companies/'+ id, company.value)
+            await router.push({ name: 'companies.index'})
+        } catch (e) {
+            if (e.response.status === 422) {
+                for (const key in e.response.data.errors) {
+                    errors.value += e.response.data.errors[key][0] + ' ';
+                }
+            }
+        }
+
+    }
+
 
     return {
         companies,
+        company,
+        getCompany,
         getCompanies,
         storeCompany,
+        updateCompany,
         errors,
     }
 

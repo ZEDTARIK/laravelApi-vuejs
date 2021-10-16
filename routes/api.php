@@ -31,4 +31,8 @@ Route::apiResource('/companies', CompanyController::class);
 
 Route::view('/{any}', 'dashboard')
     ->middleware(['auth'])
+    ->name('dashboard');
+
+Route::view('/{any}', 'dashboard')
+    ->middleware(['auth'])
     ->where('any', '.*');
